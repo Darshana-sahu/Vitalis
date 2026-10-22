@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 
 export default function WaitlistCta() {
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState('idle'); // idle | loading | success | error
+  const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrorMessage('');
 
-    // Basic email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email.trim())) {
       setStatus('error');
@@ -19,7 +18,6 @@ export default function WaitlistCta() {
 
     setStatus('loading');
 
-    // Simulate 350ms demo response
     setTimeout(() => {
       setStatus('success');
     }, 350);
@@ -35,18 +33,20 @@ export default function WaitlistCta() {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           width: '600px',
+          maxWidth: '100vw',
           height: '400px',
           background: 'radial-gradient(circle, rgba(79, 140, 255, 0.2) 0%, rgba(61, 217, 180, 0.1) 40%, transparent 70%)',
           filter: 'blur(60px)',
           pointerEvents: 'none',
         }}
+        aria-hidden="true"
       />
 
       <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '760px' }}>
         <div
           className="glass-panel"
           style={{
-            padding: '56px 40px',
+            padding: 'clamp(36px, 6vw, 56px) clamp(20px, 5vw, 40px)',
             textAlign: 'center',
             borderRadius: '28px',
             border: '1.5px solid rgba(79, 140, 255, 0.3)',
@@ -58,17 +58,19 @@ export default function WaitlistCta() {
             <span>Prototype Concept Reservation</span>
           </div>
 
-          <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 800, marginBottom: '16px' }}>
+          <h2 style={{ fontSize: 'clamp(26px, 4vw, 42px)', fontWeight: 800, marginBottom: '16px' }}>
             Experience the future of <br />
             <span className="text-gradient">personal telemetry.</span>
           </h2>
 
-          <p style={{ fontSize: '16px', color: '#94A3B8', maxWidth: '520px', margin: '0 auto 36px', lineHeight: 1.6 }}>
-            Sign up to receive technical design updates, CAD schematics, and interactive prototype previews. Zero spam, zero marketing newsletters.
+          <p style={{ fontSize: '15.5px', color: '#94A3B8', maxWidth: '520px', margin: '0 auto 32px', lineHeight: 1.6 }}>
+            Sign up to preview technical design updates, CAD schematics, and interactive prototype previews. Zero spam, zero newsletters.
           </p>
 
           {status === 'success' ? (
             <div
+              role="status"
+              aria-live="polite"
               style={{
                 background: 'rgba(61, 217, 180, 0.1)',
                 border: '1px solid #3DD9B4',
@@ -93,6 +95,7 @@ export default function WaitlistCta() {
                   color: '#94A3B8',
                   textDecoration: 'underline',
                   cursor: 'pointer',
+                  minHeight: '44px',
                 }}
               >
                 Reset form demo
@@ -100,7 +103,7 @@ export default function WaitlistCta() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: '480px', margin: '0 auto' }}>
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <div className="waitlist-form-row" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                 <input
                   type="email"
                   value={email}
@@ -118,25 +121,26 @@ export default function WaitlistCta() {
                     fontSize: '14px',
                     outline: 'none',
                     fontFamily: 'inherit',
+                    minHeight: '48px',
                   }}
                 />
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="btn btn-teal"
-                  style={{ flex: '0 0 auto', padding: '14px 28px' }}
+                  className="btn btn-teal waitlist-btn"
+                  style={{ flex: '0 0 auto', padding: '14px 28px', minHeight: '48px' }}
                 >
                   {status === 'loading' ? 'Validating...' : 'Join Waitlist'}
                 </button>
               </div>
 
               {status === 'error' && (
-                <div style={{ fontSize: '12.5px', color: '#EF4444', textAlign: 'left', paddingLeft: '12px' }}>
+                <div role="alert" aria-live="polite" style={{ fontSize: '12.5px', color: '#EF4444', textAlign: 'left', paddingLeft: '12px' }}>
                   {errorMessage}
                 </div>
               )}
 
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '16px', fontSize: '12px', color: '#64748B' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '16px', fontSize: '12px', color: '#64748B', flexWrap: 'wrap' }}>
                 <span>🔒 Simulated Client-Side Demo</span>
                 <span>•</span>
                 <span>No Actual Submission</span>
@@ -146,6 +150,17 @@ export default function WaitlistCta() {
 
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 480px) {
+          .waitlist-form-row {
+            flex-direction: column !important;
+          }
+          .waitlist-btn {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

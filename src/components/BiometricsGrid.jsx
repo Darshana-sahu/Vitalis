@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function BiometricsGrid() {
-  const [ecgMode, setEcgMode] = useState('resting'); // resting | active | recovery
+  const [ecgMode, setEcgMode] = useState('resting');
 
   const ecgProfiles = {
     resting: { bpm: 58, hrv: '82 ms', label: 'Sinus Rhythm · Rest', color: '#3DD9B4', strokeWidth: 2.2 },
@@ -25,27 +25,33 @@ export default function BiometricsGrid() {
             <span className="text-gradient">calculated on-wrist.</span>
           </h2>
           <p className="section-subtitle">
-            Six synchronized biometric streams processed in real time by an integrated low-power micro-NPU.
-            No cloud delays, no subscription tiers.
+            Six synchronized biometric streams modeled for on-wrist micro-NPU processing.
+            Zero cloud delays, zero mandatory subscriptions.
           </p>
+        </div>
+
+        {/* CONCEPT DEMONSTRATION DISCLOSURE BANNER */}
+        <div className="concept-disclosure-banner">
+          <strong>CONCEPT DEMONSTRATION:</strong> VITALIS is a conceptual product demonstration. Specifications and biometric readings are illustrative and do not represent validated medical measurements.
         </div>
 
         {/* 6-CARD GRID */}
         <div
+          className="biometrics-cards-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
             gap: '24px',
           }}
         >
           {/* CARD 1: DYNAMIC ECG WAVE */}
-          <div className="glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column' }}>
+          <div className="glass-panel" style={{ padding: 'clamp(20px, 3vw, 32px)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
               <div>
                 <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: currentEcg.color, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                  Optical ECG Array
+                  Optical ECG (Concept Model)
                 </span>
-                <h3 style={{ fontSize: '20px', fontWeight: 700, marginTop: '4px' }}>Cardiac Rhythm Analysis</h3>
+                <h3 style={{ fontSize: '20px', fontWeight: 700, marginTop: '4px' }}>Cardiac Rhythm Simulation</h3>
               </div>
               <div style={{ textAlign: 'right' }}>
                 <span style={{ fontSize: '24px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#F8FAFC' }}>
@@ -56,10 +62,9 @@ export default function BiometricsGrid() {
             </div>
 
             <p style={{ fontSize: '13.5px', color: '#94A3B8', marginBottom: '20px', lineHeight: 1.5 }}>
-              Continuous single-lead equivalent optical electrocardiogram monitoring baseline HRV and autonomic coherence.
+              Conceptual optical rhythm sensor modeling sinus HRV and autonomic coherence for wellness demonstration.
             </p>
 
-            {/* Interactive ECG preview box */}
             <div
               style={{
                 background: '#07090D',
@@ -69,7 +74,7 @@ export default function BiometricsGrid() {
                 marginBottom: '16px',
               }}
             >
-              <svg viewBox="0 0 320 80" style={{ width: '100%', height: '70px', overflow: 'visible' }}>
+              <svg viewBox="0 0 320 80" style={{ width: '100%', height: '70px', overflow: 'visible' }} aria-label="Simulated ECG rhythm wave">
                 <line x1="0" y1="40" x2="320" y2="40" stroke="rgba(255, 255, 255, 0.08)" strokeDasharray="3 3" />
                 <path
                   d={
@@ -96,7 +101,6 @@ export default function BiometricsGrid() {
               </div>
             </div>
 
-            {/* Mode toggles */}
             <div style={{ display: 'flex', gap: '8px', marginTop: 'auto' }}>
               {['resting', 'active', 'recovery'].map((mode) => (
                 <button
@@ -105,6 +109,7 @@ export default function BiometricsGrid() {
                   onClick={() => setEcgMode(mode)}
                   style={{
                     flex: 1,
+                    minHeight: '44px',
                     padding: '8px 12px',
                     borderRadius: '8px',
                     fontSize: '12px',
@@ -114,7 +119,9 @@ export default function BiometricsGrid() {
                     color: ecgMode === mode ? '#F8FAFC' : '#94A3B8',
                     border: ecgMode === mode ? '1px solid rgba(255,255,255,0.2)' : '1px solid transparent',
                     transition: 'all 0.2s ease',
+                    cursor: 'pointer',
                   }}
+                  aria-pressed={ecgMode === mode}
                 >
                   {mode}
                 </button>
@@ -123,11 +130,11 @@ export default function BiometricsGrid() {
           </div>
 
           {/* CARD 2: SLEEP ARCHITECTURE */}
-          <div className="glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column' }}>
+          <div className="glass-panel" style={{ padding: 'clamp(20px, 3vw, 32px)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
               <div>
                 <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#A78BFA', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                  Circadian Sensor
+                  Circadian Sensor Model
                 </span>
                 <h3 style={{ fontSize: '20px', fontWeight: 700, marginTop: '4px' }}>Sleep Architecture</h3>
               </div>
@@ -140,58 +147,57 @@ export default function BiometricsGrid() {
             </div>
 
             <p style={{ fontSize: '13.5px', color: '#94A3B8', marginBottom: '20px', lineHeight: 1.5 }}>
-              Precision breakdown of sleep stages via continuous skin temperature, HRV drop, and micro-motion kinetics.
+              Hypothetical breakdown of sleep stages via continuous skin temperature, HRV drop, and micro-motion kinetics.
             </p>
 
-            {/* Segmented bar */}
             <div style={{ marginBottom: '16px' }}>
-              <div style={{ display: 'flex', height: '14px', borderRadius: '6px', overflow: 'hidden', gap: '3px' }}>
+              <div style={{ display: 'flex', height: '14px', borderRadius: '6px', overflow: 'hidden', gap: '3px' }} role="img" aria-label="Sleep stage distribution: Deep 24%, REM 28%, Light 41%, Awake 7%">
                 <div style={{ width: '24%', background: '#4F8CFF' }} title="Deep Sleep 24%" />
                 <div style={{ width: '28%', background: '#818CF8' }} title="REM Sleep 28%" />
                 <div style={{ width: '41%', background: '#38BDF8' }} title="Light Sleep 41%" />
                 <div style={{ width: '7%', background: '#64748B' }} title="Awake 7%" />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', marginTop: '12px', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
-                <div><span style={{ color: '#4F8CFF' }}>● </span>Deep: 1h 58m</div>
-                <div><span style={{ color: '#818CF8' }}>● </span>REM: 2h 18m</div>
-                <div><span style={{ color: '#38BDF8' }}>● </span>Light: 3h 22m</div>
-                <div><span style={{ color: '#64748B' }}>● </span>Awake: 36m</div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px', marginTop: '12px', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
+                <div><span style={{ color: '#4F8CFF' }}>● </span>Deep: 1h 58m (24%)</div>
+                <div><span style={{ color: '#818CF8' }}>● </span>REM: 2h 18m (28%)</div>
+                <div><span style={{ color: '#38BDF8' }}>● </span>Light: 3h 22m (41%)</div>
+                <div><span style={{ color: '#64748B' }}>● </span>Awake: 36m (7%)</div>
               </div>
             </div>
 
             <div style={{ marginTop: 'auto', background: 'rgba(255, 255, 255, 0.03)', padding: '12px 14px', borderRadius: '10px', fontSize: '12px', color: '#94A3B8' }}>
-              Total Sleep: <strong style={{ color: '#F8FAFC' }}>8 hrs 14 mins</strong> · Latency: <strong style={{ color: '#3DD9B4' }}>9 mins</strong>
+              Illustrative Total: <strong style={{ color: '#F8FAFC' }}>8 hrs 14 mins</strong> · Latency: <strong style={{ color: '#3DD9B4' }}>9 mins</strong>
             </div>
           </div>
 
           {/* CARD 3: SPO2 OXYGENATION */}
-          <div className="glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column' }}>
+          <div className="glass-panel" style={{ padding: 'clamp(20px, 3vw, 32px)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
               <div>
                 <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#38BDF8', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                  Multi-Wavelength IR
+                  Multi-Wavelength IR Concept
                 </span>
-                <h3 style={{ fontSize: '20px', fontWeight: 700, marginTop: '4px' }}>Blood Oxygenation (SpO₂)</h3>
+                <h3 style={{ fontSize: '20px', fontWeight: 700, marginTop: '4px' }}>Simulated SpO₂ Readings</h3>
               </div>
               <div style={{ textAlign: 'right' }}>
                 <span style={{ fontSize: '24px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#38BDF8' }}>
                   99%
                 </span>
-                <span style={{ fontSize: '11px', color: '#3DD9B4', marginLeft: '4px' }}>Optimal</span>
+                <span style={{ fontSize: '11px', color: '#3DD9B4', marginLeft: '4px' }}>Demo Optimal</span>
               </div>
             </div>
 
             <p style={{ fontSize: '13.5px', color: '#94A3B8', marginBottom: '20px', lineHeight: 1.5 }}>
-              Dual 660nm red and 940nm infrared reflectance measuring capillary pulse saturation throughout day and sleep.
+              Dual 660nm red and 940nm infrared reflectance simulation measuring capillary pulse saturation patterns.
             </p>
 
             <div style={{ background: '#07090D', borderRadius: '12px', padding: '14px', marginBottom: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#94A3B8', marginBottom: '8px' }}>
-                <span>24h Range: 97% – 100%</span>
-                <span style={{ color: '#3DD9B4' }}>0 Desaturations</span>
+                <span>Simulated Range: 97% – 100%</span>
+                <span style={{ color: '#3DD9B4' }}>Illustrative Demo</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'flex-end', gap: '4px', height: '40px' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-end', gap: '4px', height: '40px' }} aria-hidden="true">
                 {[98, 99, 99, 97, 98, 99, 100, 99, 99, 98, 99, 99, 99, 100, 99].map((val, idx) => (
                   <div
                     key={idx}
@@ -208,16 +214,16 @@ export default function BiometricsGrid() {
             </div>
 
             <div style={{ marginTop: 'auto', fontSize: '12.5px', color: '#64748B' }}>
-              Continuous nocturnal desaturation screening with hypoxic event alerting.
+              Illustrative nocturnal saturation tracking concept for wellness research.
             </div>
           </div>
 
           {/* CARD 4: SUB-SKIN TEMPERATURE DRIFT */}
-          <div className="glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column' }}>
+          <div className="glass-panel" style={{ padding: 'clamp(20px, 3vw, 32px)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
               <div>
                 <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#F59E0B', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                  Micro-Kelvin Thermistor
+                  Micro-Kelvin Thermistor Concept
                 </span>
                 <h3 style={{ fontSize: '20px', fontWeight: 700, marginTop: '4px' }}>Sub-Skin Thermal Drift</h3>
               </div>
@@ -230,7 +236,7 @@ export default function BiometricsGrid() {
             </div>
 
             <p style={{ fontSize: '13.5px', color: '#94A3B8', marginBottom: '20px', lineHeight: 1.5 }}>
-              Dual-sensor heat-flux thermistor tracking baseline deviations to detect early immune responses or overtraining.
+              Dual-sensor heat-flux thermistor concept tracking baseline deviations to model circadian variance and rest.
             </p>
 
             <div style={{ background: '#07090D', borderRadius: '12px', padding: '16px', marginBottom: '16px' }}>
@@ -250,12 +256,12 @@ export default function BiometricsGrid() {
             </div>
 
             <div style={{ marginTop: 'auto', fontSize: '12.5px', color: '#64748B' }}>
-              Calibrated for nocturnal circadian rhythms and physiological recovery.
+              Conceptual model calibrated for nocturnal circadian rhythms.
             </div>
           </div>
 
           {/* CARD 5: NEUROLOGICAL READINESS */}
-          <div className="glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column' }}>
+          <div className="glass-panel" style={{ padding: 'clamp(20px, 3vw, 32px)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
               <div>
                 <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#3DD9B4', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
@@ -278,8 +284,8 @@ export default function BiometricsGrid() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px', background: '#07090D', borderRadius: '12px', padding: '16px', marginBottom: '16px' }}>
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: '12px', color: '#94A3B8', marginBottom: '4px' }}>Target Zone</div>
-                <div style={{ fontSize: '16px', fontWeight: 700, color: '#F8FAFC' }}>High Performance</div>
-                <div style={{ fontSize: '11px', color: '#3DD9B4' }}>Safe for high CNS exertion</div>
+                <div style={{ fontSize: '16px', fontWeight: 700, color: '#F8FAFC' }}>High Readiness</div>
+                <div style={{ fontSize: '11px', color: '#3DD9B4' }}>Optimal autonomic balance</div>
               </div>
               <div style={{ width: '48px', height: '48px', borderRadius: '50%', border: '4px solid #3DD9B4', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-mono)', fontSize: '14px', fontWeight: 700 }}>
                 94
@@ -287,12 +293,12 @@ export default function BiometricsGrid() {
             </div>
 
             <div style={{ marginTop: 'auto', fontSize: '12.5px', color: '#64748B' }}>
-              Calculated immediately upon waking via 5-minute quiet autonomic sample.
+              Calculated via quiet autonomic sample during wake transition.
             </div>
           </div>
 
           {/* CARD 6: RESPIRATORY COHERENCE PACER */}
-          <div className="glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column' }}>
+          <div className="glass-panel" style={{ padding: 'clamp(20px, 3vw, 32px)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
               <div>
                 <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#4F8CFF', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
@@ -313,7 +319,6 @@ export default function BiometricsGrid() {
             </p>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100px', position: 'relative' }}>
-              {/* Harmonic breathing circle */}
               <div
                 style={{
                   width: '64px',
@@ -333,7 +338,7 @@ export default function BiometricsGrid() {
             </div>
 
             <div style={{ marginTop: 'auto', fontSize: '12.5px', color: '#64748B' }}>
-              Harmonic 0.1Hz resonant pacer activates parasympathetic recovery within 3 minutes.
+              Harmonic 0.1Hz resonant pacer stimulates parasympathetic autonomic recovery.
             </div>
           </div>
 

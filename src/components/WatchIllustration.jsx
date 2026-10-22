@@ -44,7 +44,7 @@ export const COLORWAYS = {
     accentColor: '#3DD9B4',
     accentGlow: 'rgba(61, 217, 180, 0.4)',
     material: 'Micro-Blasted Satin Titanium',
-    strapDesc: 'Antimicrobial medical-grade fluoroelastomer with ergonomic thermal micro-grooves.',
+    strapDesc: 'Antimicrobial hypoallergenic fluoroelastomer with ergonomic thermal micro-grooves.',
   },
   titanium: {
     id: 'titanium',
@@ -63,47 +63,48 @@ export const COLORWAYS = {
   }
 };
 
-export default function WatchIllustration({ colorway = 'obsidian', bpm = 68, className = '' }) {
+export default function WatchIllustration({ colorway = 'obsidian', bpm = 68, idPrefix = '', className = '' }) {
   const current = COLORWAYS[colorway] || COLORWAYS.obsidian;
+  const prefix = idPrefix ? `${idPrefix}-` : `${current.id}-`;
 
   return (
-    <div className={`watch-illustration-container ${className}`} style={{ display: 'inline-block', position: 'relative' }}>
+    <div className={`watch-illustration-container ${className}`} style={{ display: 'inline-block', position: 'relative', maxWidth: '100%' }}>
       <svg
         viewBox="0 0 320 480"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         style={{ width: '100%', maxWidth: '320px', height: 'auto', filter: 'drop-shadow(0 25px 40px rgba(0, 0, 0, 0.75))' }}
         role="img"
-        aria-label={`VITALIS smartwatch in ${current.name} finish`}
+        aria-label={`VITALIS concept smartwatch illustration in ${current.name} finish`}
       >
         <defs>
-          <linearGradient id="caseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id={`${prefix}caseGrad`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={current.caseHighlight} />
             <stop offset="50%" stopColor={current.caseColor} />
             <stop offset="100%" stopColor="#0B0D11" />
           </linearGradient>
 
-          <linearGradient id="bezelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id={`${prefix}bezelGrad`} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#2E3748" />
             <stop offset="100%" stopColor="#0A0D12" />
           </linearGradient>
 
-          <linearGradient id="bandTopGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id={`${prefix}bandTopGrad`} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor={current.bandColor} />
             <stop offset="100%" stopColor={current.bandHighlight} />
           </linearGradient>
 
-          <linearGradient id="bandBottomGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id={`${prefix}bandBottomGrad`} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor={current.bandHighlight} />
             <stop offset="100%" stopColor={current.bandColor} />
           </linearGradient>
 
-          <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id={`${prefix}screenGrad`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#040609" />
             <stop offset="100%" stopColor="#0A0E17" />
           </linearGradient>
 
-          <filter id="ecgGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <filter id={`${prefix}ecgGlow`} x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="3" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
@@ -112,11 +113,10 @@ export default function WatchIllustration({ colorway = 'obsidian', bpm = 68, cla
         {/* TOP STRAP */}
         <path
           d="M 96 110 L 108 12 C 108 8, 114 4, 120 4 L 200 4 C 206 4, 212 8, 212 12 L 224 110 Z"
-          fill="url(#bandTopGrad)"
+          fill={`url(#${prefix}bandTopGrad)`}
           stroke="#1F2937"
           strokeWidth="1.5"
         />
-        {/* Top strap ribbing lines */}
         {[24, 44, 64, 84].map((y) => (
           <line
             key={y}
@@ -133,11 +133,10 @@ export default function WatchIllustration({ colorway = 'obsidian', bpm = 68, cla
         {/* BOTTOM STRAP */}
         <path
           d="M 96 370 L 108 468 C 108 472, 114 476, 120 476 L 200 476 C 206 476, 212 472, 212 468 L 224 370 Z"
-          fill="url(#bandBottomGrad)"
+          fill={`url(#${prefix}bandBottomGrad)`}
           stroke="#1F2937"
           strokeWidth="1.5"
         />
-        {/* Bottom strap ribbing lines */}
         {[396, 416, 436, 456].map((y) => (
           <line
             key={y}
@@ -151,35 +150,32 @@ export default function WatchIllustration({ colorway = 'obsidian', bpm = 68, cla
           />
         ))}
 
-        {/* WATCH CHASSIS (Grade-5 Titanium Unibody) */}
-        {/* Shadow base */}
+        {/* WATCH CHASSIS */}
         <rect x="56" y="96" width="208" height="288" rx="54" fill="#05070A" />
 
-        {/* Main outer case */}
         <rect
           x="58"
           y="98"
           width="204"
           height="284"
           rx="52"
-          fill="url(#caseGrad)"
+          fill={`url(#${prefix}caseGrad)`}
           stroke={current.caseBorder}
           strokeWidth="2"
         />
 
-        {/* Precision chamfer inner ring */}
         <rect
           x="66"
           y="106"
           width="188"
           height="268"
           rx="44"
-          fill="url(#bezelGrad)"
+          fill={`url(#${prefix}bezelGrad)`}
           stroke="rgba(255, 255, 255, 0.15)"
           strokeWidth="1.2"
         />
 
-        {/* SOLID-STATE HAPTIC CROWN */}
+        {/* CROWN */}
         <rect
           x="262"
           y="180"
@@ -196,7 +192,6 @@ export default function WatchIllustration({ colorway = 'obsidian', bpm = 68, cla
         <line x1="265" y1="212" x2="271" y2="212" stroke="#111827" strokeWidth="2" />
         <line x1="265" y1="220" x2="271" y2="220" stroke="#111827" strokeWidth="2" />
 
-        {/* SECONDARY SENSOR RECESS */}
         <rect x="262" y="260" width="8" height="32" rx="3" fill="#182234" />
 
         {/* OLED DISPLAY SURFACE */}
@@ -206,13 +201,12 @@ export default function WatchIllustration({ colorway = 'obsidian', bpm = 68, cla
           width="172"
           height="252"
           rx="38"
-          fill="url(#screenGrad)"
+          fill={`url(#${prefix}screenGrad)`}
           stroke="#000000"
           strokeWidth="3"
         />
 
         {/* SCREEN CONTENT */}
-        {/* Status bar */}
         <text x="96" y="146" fill="#94A3B8" fontSize="11" fontFamily="'JetBrains Mono', monospace" fontWeight="600">
           09:41
         </text>
@@ -237,12 +231,9 @@ export default function WatchIllustration({ colorway = 'obsidian', bpm = 68, cla
           </text>
         </g>
 
-        {/* Continuous Dynamic ECG Wave */}
+        {/* ECG Wave */}
         <g transform="translate(86, 206)">
-          {/* Subtle background grid line */}
           <line x1="0" y1="30" x2="148" y2="30" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1" strokeDasharray="3 3" />
-
-          {/* Active rhythmic pulse path */}
           <path
             d="M 0 30 L 22 30 L 28 22 L 34 36 L 40 10 L 46 44 L 52 28 L 58 30 L 82 30 L 88 20 L 96 38 L 102 12 L 108 42 L 114 28 L 120 30 L 148 30"
             fill="none"
@@ -250,16 +241,13 @@ export default function WatchIllustration({ colorway = 'obsidian', bpm = 68, cla
             strokeWidth="2.2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            filter="url(#ecgGlow)"
+            filter={`url(#${prefix}ecgGlow)`}
           />
         </g>
 
-        {/* Biometric Dial Gauges */}
         {/* Recovery / Readiness arc */}
         <g transform="translate(160, 290)">
-          {/* Track */}
           <circle cx="0" cy="0" r="32" fill="none" stroke="#1E293B" strokeWidth="5" />
-          {/* Value Arc (approx 75% circumference) */}
           <circle
             cx="0"
             cy="0"
@@ -280,12 +268,11 @@ export default function WatchIllustration({ colorway = 'obsidian', bpm = 68, cla
           </text>
         </g>
 
-        {/* Sub-label */}
-        <text x="160" y="344" fill={current.accentColor} fontSize="9" fontWeight="600" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" letterSpacing="0.1em">
-          OPTICAL TELEMETRY ACTIVE
+        {/* Simulated Telemetry Label */}
+        <text x="160" y="344" fill={current.accentColor} fontSize="8.5" fontWeight="600" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" letterSpacing="0.08em">
+          SIMULATED TELEMETRY ACTIVE
         </text>
 
-        {/* Subtle glass reflection on sapphire lens */}
         <path
           d="M 78 120 C 130 116, 210 150, 238 210 L 238 128 C 238 120, 230 114, 222 114 L 94 114 C 84 114, 78 116, 78 120 Z"
           fill="rgba(255, 255, 255, 0.04)"

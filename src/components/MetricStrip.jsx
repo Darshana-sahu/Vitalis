@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const METRICS = [
-  { target: 14, prefix: '', suffix: ' Days', label: 'Continuous Endurance Target', note: 'Single magnetic charge' },
-  { target: 50, prefix: '', suffix: 'M', label: 'Immersion Rating (5 ATM)', note: 'Certified water resistance' },
-  { target: 120, prefix: '', suffix: '+', label: 'Autonomous Profiles', note: 'Kinetic & cardio modes' },
+  { target: 14, prefix: '', suffix: ' Days', label: 'Continuous Endurance Target', note: 'Concept target specification' },
+  { target: 50, prefix: '', suffix: 'M', label: 'Immersion Rating (5 ATM)', note: 'Envisioned water resistance' },
+  { target: 120, prefix: '', suffix: '+', label: 'Autonomous Profiles', note: 'Conceptual tracking modes' },
   { target: 0.2, prefix: '<', suffix: 's', label: 'Optical Sensor Latency', note: 'Sub-second real-time loop', isFloat: true },
 ];
 
@@ -12,6 +12,11 @@ export default function MetricStrip() {
   const stripRef = useRef(null);
 
   useEffect(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setAnimated(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -19,7 +24,7 @@ export default function MetricStrip() {
           observer.disconnect();
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.25 }
     );
 
     if (stripRef.current) {
@@ -42,10 +47,11 @@ export default function MetricStrip() {
     >
       <div className="container">
         <div
+          className="metric-strip-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '32px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '28px',
             alignItems: 'center',
           }}
         >
@@ -60,6 +66,15 @@ export default function MetricStrip() {
           </p>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 520px) {
+          .metric-strip-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 20px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
@@ -70,13 +85,18 @@ function MetricItem({ item, startAnimation }) {
   useEffect(() => {
     if (!startAnimation) return;
 
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setValue(item.target);
+      return;
+    }
+
     let startTime;
-    const duration = 1400;
+    const duration = 1200;
 
     const animate = (time) => {
       if (!startTime) startTime = time;
       const progress = Math.min((time - startTime) / duration, 1);
-      const easeProgress = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
 
       if (item.isFloat) {
         setValue((item.target * easeProgress).toFixed(1));
@@ -99,7 +119,7 @@ function MetricItem({ item, startAnimation }) {
         <span
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '32px',
+            fontSize: 'clamp(26px, 3.5vw, 32px)',
             fontWeight: 700,
             color: '#3DD9B4',
             letterSpacing: '-0.02em',
@@ -108,7 +128,7 @@ function MetricItem({ item, startAnimation }) {
           {item.prefix}{startAnimation ? value : 0}{item.suffix}
         </span>
       </div>
-      <div style={{ fontSize: '14.5px', fontWeight: 600, color: '#F8FAFC' }}>
+      <div style={{ fontSize: '14px', fontWeight: 600, color: '#F8FAFC' }}>
         {item.label}
       </div>
       <div style={{ fontSize: '12px', color: '#94A3B8' }}>

@@ -6,7 +6,7 @@ export default function Footer() {
       style={{
         backgroundColor: '#07090C',
         borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-        padding: '72px 0 40px',
+        padding: '64px 0 36px',
         color: '#94A3B8',
         fontSize: '14px',
       }}
@@ -16,8 +16,8 @@ export default function Footer() {
           style={{
             display: 'grid',
             gridTemplateColumns: '1.5fr repeat(3, 1fr)',
-            gap: '40px',
-            marginBottom: '48px',
+            gap: '36px',
+            marginBottom: '40px',
           }}
           className="footer-grid"
         >
@@ -32,9 +32,10 @@ export default function Footer() {
                 border: '1.5px solid #3DD9B4',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                flexShrink: 0
               }}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M3 12h4l3-7 4 14 3-7h4" stroke="#4F8CFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
@@ -42,11 +43,11 @@ export default function Footer() {
                 VITALIS
               </span>
             </div>
-            <p style={{ fontSize: '13.5px', lineHeight: 1.6, maxWidth: '320px', color: '#94A3B8', marginBottom: '16px' }}>
+            <p style={{ fontSize: '13.5px', lineHeight: 1.6, maxWidth: '320px', color: '#94A3B8', marginBottom: '14px' }}>
               Next-generation health telemetry wearable concept crafted in Grade-5 aerospace titanium with continuous multi-spectral biometrics.
             </p>
             <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#3DD9B4' }}>
-              PROTOTYPE SPECIFICATION v2.4
+              CONCEPT PORTFOLIO DEMO v2.4
             </div>
           </div>
 
@@ -85,7 +86,7 @@ export default function Footer() {
               <li><span style={{ color: '#64748B' }}>Edge Neural Engine</span></li>
               <li><span style={{ color: '#64748B' }}>Local Biometric Vault</span></li>
               <li><span style={{ color: '#64748B' }}>Zero Subscription Model</span></li>
-              <li><a href="#waitlist" style={{ color: '#3DD9B4' }}>Join Waitlist</a></li>
+              <li><a href="#waitlist" style={{ color: '#3DD9B4' }}>Join Waitlist Demo</a></li>
             </ul>
           </div>
         </div>
@@ -101,10 +102,10 @@ export default function Footer() {
           }}
         >
           <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#F59E0B', textTransform: 'uppercase', marginBottom: '6px' }}>
-            Conceptual Portfolio Demonstration
+            Conceptual Product Demonstration
           </div>
           <p style={{ fontSize: '12px', lineHeight: 1.6, color: '#94A3B8' }}>
-            <strong>DISCLAIMER:</strong> VITALIS is an original fictional smart-health wearable concept created strictly for product design, frontend engineering, and portfolio demonstration purposes. All specifications, sensor capabilities, and battery life claims represent fictional engineering targets and do not represent a manufactured commercial product, medical device, or licensed clinical system.
+            <strong>DISCLAIMER:</strong> VITALIS is a conceptual product demonstration. Specifications and biometric readings are illustrative and do not represent validated medical measurements. All hardware features, sensors, battery longevity metrics, and software interfaces are fictional design targets created strictly for portfolio showcasing.
           </p>
         </div>
 
@@ -119,11 +120,11 @@ export default function Footer() {
             fontSize: '12px',
             color: '#64748B',
             borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-            paddingTop: '24px',
+            paddingTop: '20px',
           }}
         >
           <div>
-            © {new Date().getFullYear()} VITALIS Concept. Built with React & Vite. All rights reserved.
+            © {new Date().getFullYear()} VITALIS Concept. Built with React &amp; Vite. All rights reserved.
           </div>
           <div style={{ display: 'flex', gap: '20px' }}>
             <a href="#faq" style={{ color: '#64748B' }}>Privacy Philosophy</a>

@@ -2,21 +2,21 @@ import React from 'react';
 
 const COMPARISON_ROWS = [
   {
-    feature: 'Continuous Battery Endurance',
-    vitalis: 'Up to 14 Days (Continuous)',
+    feature: 'Continuous Battery Endurance (Target)',
+    vitalis: 'Up to 14 Days (Concept Target)',
     fitnessBand: '5 – 7 Days',
     smartwatch: '1 – 2 Days (Requires Daily Charge)',
     highlight: true,
   },
   {
     feature: 'Ownership & Membership Cost',
-    vitalis: 'Zero Subscription · Lifetime Included',
+    vitalis: 'Zero Subscription · Lifetime Concept',
     fitnessBand: 'Mandatory $8–$15/mo Cloud Fee',
     smartwatch: 'Optional Paid Cloud Services',
     highlight: true,
   },
   {
-    feature: 'Biosensing Telemetry Suite',
+    feature: 'Biosensing Telemetry Suite (Concept)',
     vitalis: 'Optical ECG + Multi-λ SpO₂ + Skin Temp',
     fitnessBand: 'Basic Heart Rate Only',
     smartwatch: 'Standard Heart Rate + Intermittent ECG',
@@ -24,21 +24,21 @@ const COMPARISON_ROWS = [
   },
   {
     feature: 'Biometric Processing Location',
-    vitalis: '100% On-Wrist Micro-NPU (Offline)',
+    vitalis: '100% On-Wrist Micro-NPU Concept (Offline)',
     fitnessBand: 'Cloud-Dependent Processing',
     smartwatch: 'Mixed Cloud & Phone Sync',
     highlight: true,
   },
   {
-    feature: 'Chassis Metallurgical Material',
-    vitalis: 'Aerospace Grade-5 Titanium Billet',
+    feature: 'Envisioned Chassis Metallurgy',
+    vitalis: 'Grade-5 Titanium Billet (Concept)',
     fitnessBand: 'Molded Polycarbonate Plastic',
     smartwatch: 'Anodized Aluminum / Zinc Alloy',
     highlight: false,
   },
   {
-    feature: 'Water Resistance Standard',
-    vitalis: '5 ATM / 50M Hermetic Seal',
+    feature: 'Water Resistance Standard (Target)',
+    vitalis: '5 ATM / 50M Hermetic Target',
     fitnessBand: 'IP67 (Splash & Rain Only)',
     smartwatch: '5 ATM (Water Resistance)',
     highlight: false,
@@ -64,11 +64,17 @@ export default function ComparisonTable() {
           </p>
         </div>
 
+        {/* SWIPE HINT ON MOBILE */}
+        <div className="mobile-table-hint" style={{ display: 'none', fontSize: '12px', color: '#64748B', textAlign: 'center', marginBottom: '12px', fontFamily: 'var(--font-mono)' }}>
+          ← Swipe horizontally to view full matrix →
+        </div>
+
         {/* COMPARISON TABLE */}
         <div
           className="glass-panel"
           style={{
             overflowX: 'auto',
+            WebkitOverflowScrolling: 'touch',
             borderRadius: '20px',
             border: '1px solid rgba(255, 255, 255, 0.08)',
           }}
@@ -79,17 +85,17 @@ export default function ComparisonTable() {
               borderCollapse: 'collapse',
               textAlign: 'left',
               fontSize: '14px',
-              minWidth: '640px',
+              minWidth: '600px',
             }}
           >
             <thead>
               <tr style={{ background: 'rgba(255, 255, 255, 0.04)', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                <th style={{ padding: '20px 24px', fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#94A3B8', textTransform: 'uppercase' }}>
+                <th style={{ padding: '18px 20px', fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#94A3B8', textTransform: 'uppercase' }}>
                   Architecture Feature
                 </th>
                 <th
                   style={{
-                    padding: '20px 24px',
+                    padding: '18px 20px',
                     fontFamily: 'var(--font-mono)',
                     fontSize: '13px',
                     color: '#3DD9B4',
@@ -101,10 +107,10 @@ export default function ComparisonTable() {
                 >
                   ★ VITALIS (Concept Target)
                 </th>
-                <th style={{ padding: '20px 24px', fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#94A3B8', textTransform: 'uppercase' }}>
+                <th style={{ padding: '18px 20px', fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#94A3B8', textTransform: 'uppercase' }}>
                   Basic Fitness Trackers
                 </th>
-                <th style={{ padding: '20px 24px', fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#94A3B8', textTransform: 'uppercase' }}>
+                <th style={{ padding: '18px 20px', fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#94A3B8', textTransform: 'uppercase' }}>
                   Generic Smartwatches
                 </th>
               </tr>
@@ -118,12 +124,12 @@ export default function ComparisonTable() {
                     background: row.highlight ? 'rgba(79, 140, 255, 0.02)' : 'transparent',
                   }}
                 >
-                  <td style={{ padding: '18px 24px', fontWeight: 600, color: '#F8FAFC' }}>
+                  <td style={{ padding: '16px 20px', fontWeight: 600, color: '#F8FAFC' }}>
                     {row.feature}
                   </td>
                   <td
                     style={{
-                      padding: '18px 24px',
+                      padding: '16px 20px',
                       fontWeight: 700,
                       color: '#3DD9B4',
                       background: 'rgba(61, 217, 180, 0.05)',
@@ -133,10 +139,10 @@ export default function ComparisonTable() {
                   >
                     {row.vitalis}
                   </td>
-                  <td style={{ padding: '18px 24px', color: '#94A3B8' }}>
+                  <td style={{ padding: '16px 20px', color: '#94A3B8' }}>
                     {row.fitnessBand}
                   </td>
-                  <td style={{ padding: '18px 24px', color: '#94A3B8' }}>
+                  <td style={{ padding: '16px 20px', color: '#94A3B8' }}>
                     {row.smartwatch}
                   </td>
                 </tr>
@@ -147,11 +153,19 @@ export default function ComparisonTable() {
 
         <div style={{ textAlign: 'center', marginTop: '24px' }}>
           <p style={{ fontSize: '12px', fontFamily: 'var(--font-mono)', color: '#64748B' }}>
-            * Comparison matrix illustrates typical market product category characteristics against VITALIS concept design targets. No proprietary competitor trademark is claimed.
+            * VITALIS is a conceptual product demonstration. Specifications and biometric readings are illustrative and do not represent validated medical measurements. Comparison matrix illustrates typical category characteristics.
           </p>
         </div>
 
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .mobile-table-hint {
+            display: block !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

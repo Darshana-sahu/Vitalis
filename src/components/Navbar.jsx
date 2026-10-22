@@ -12,6 +12,16 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { label: 'Biometrics', href: '#biometrics' },
     { label: 'Customizer', href: '#customizer' },
@@ -38,10 +48,11 @@ export default function Navbar() {
         borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
         transition: 'all 0.3s ease',
       }}
+      aria-label="Primary navigation"
     >
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '72px' }}>
         {/* LOGO */}
-        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '10px' }} aria-label="VITALIS Home">
+        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '10px' }} aria-label="VITALIS Concept Home">
           <div style={{
             width: '32px',
             height: '32px',
@@ -51,9 +62,10 @@ export default function Navbar() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 0 12px rgba(61, 217, 180, 0.3)'
+            boxShadow: '0 0 12px rgba(61, 217, 180, 0.3)',
+            flexShrink: 0
           }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M3 12h4l3-7 4 14 3-7h4" stroke="#4F8CFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
@@ -66,7 +78,7 @@ export default function Navbar() {
           }}>
             VITALIS
           </span>
-          <span style={{
+          <span className="nav-badge-concept" style={{
             fontFamily: "var(--font-mono)",
             fontSize: '9.5px',
             color: '#3DD9B4',
@@ -75,7 +87,8 @@ export default function Navbar() {
             borderRadius: '999px',
             border: '1px solid rgba(61, 217, 180, 0.25)',
             textTransform: 'uppercase',
-            letterSpacing: '0.08em'
+            letterSpacing: '0.08em',
+            whiteSpace: 'nowrap'
           }}>
             Concept v2.4
           </span>
@@ -101,12 +114,12 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA BUTTON */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        {/* CTA BUTTON & MOBILE TOGGLE */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <a
             href="#waitlist"
-            className="btn btn-primary"
-            style={{ padding: '10px 22px', fontSize: '13px' }}
+            className="btn btn-primary nav-cta-desktop"
+            style={{ padding: '9px 20px', fontSize: '13px' }}
           >
             Early Access Demo
           </a>
@@ -118,16 +131,21 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav-drawer"
             style={{
               display: 'none',
-              padding: '8px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '44px',
+              height: '44px',
               borderRadius: '8px',
               color: '#F8FAFC',
               background: 'rgba(255, 255, 255, 0.05)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
+              cursor: 'pointer',
             }}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
               {mobileMenuOpen ? (
                 <>
                   <line x1="18" y1="6" x2="6" y2="18" />
@@ -148,13 +166,14 @@ export default function Navbar() {
       {/* MOBILE DRAWER */}
       {mobileMenuOpen && (
         <div
+          id="mobile-nav-drawer"
           style={{
             backgroundColor: 'rgba(9, 9, 11, 0.98)',
             borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-            padding: '24px',
+            padding: '20px 24px 28px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '18px',
+            gap: '14px',
           }}
         >
           {navLinks.map((link) => (
@@ -166,8 +185,11 @@ export default function Navbar() {
                 fontSize: '16px',
                 fontWeight: 500,
                 color: '#E2E8F0',
-                padding: '8px 0',
+                padding: '12px 0',
                 borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                minHeight: '44px',
+                display: 'flex',
+                alignItems: 'center',
               }}
             >
               {link.label}
@@ -177,7 +199,7 @@ export default function Navbar() {
             href="#waitlist"
             onClick={handleLinkClick}
             className="btn btn-teal"
-            style={{ marginTop: '8px', width: '100%', textAlign: 'center' }}
+            style={{ marginTop: '8px', width: '100%', textAlign: 'center', minHeight: '46px' }}
           >
             Join Prototype Waitlist
           </a>
@@ -191,6 +213,14 @@ export default function Navbar() {
           }
           .mobile-toggle-btn {
             display: flex !important;
+          }
+        }
+        @media (max-width: 580px) {
+          .nav-cta-desktop {
+            display: none !important;
+          }
+          .nav-badge-concept {
+            display: none !important;
           }
         }
       `}</style>

@@ -4,12 +4,12 @@ const PRINCIPLES = [
   {
     icon: '⚡',
     title: 'Adaptive Micro-Watt Sensing',
-    desc: 'Optical sensor polling intelligently scales from 1Hz at rest to 100Hz during intense kinetic strain, optimizing battery endurance up to 14 days without missing biometric events.',
+    desc: 'Optical sensor polling intelligently scales from 1Hz at rest to 100Hz during kinetic strain, optimizing concept battery endurance up to 14 days without missing biometric events.',
   },
   {
     icon: '🧠',
     title: 'Edge Neural Processing',
-    desc: 'An on-wrist low-power micro-NPU runs physiological machine-learning models locally, delivering instant HRV, strain, and sleep stage analysis with zero network reliance.',
+    desc: 'An on-wrist low-power micro-NPU concept runs physiological machine-learning models locally, delivering instant HRV, strain, and sleep stage analysis with zero network reliance.',
   },
   {
     icon: '🔒',
@@ -40,8 +40,8 @@ export default function TechSpecs() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '28px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+            gap: '24px',
           }}
         >
           {PRINCIPLES.map((item, idx) => (
@@ -49,17 +49,17 @@ export default function TechSpecs() {
               key={idx}
               className="glass-panel"
               style={{
-                padding: '36px 30px',
+                padding: 'clamp(24px, 3.5vw, 36px) clamp(20px, 3vw, 30px)',
                 display: 'flex',
                 flexDirection: 'column',
               }}
             >
               <div
                 style={{
-                  fontSize: '28px',
+                  fontSize: '26px',
                   marginBottom: '18px',
-                  width: '54px',
-                  height: '54px',
+                  width: '52px',
+                  height: '52px',
                   borderRadius: '14px',
                   background: 'rgba(255, 255, 255, 0.05)',
                   border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -67,6 +67,7 @@ export default function TechSpecs() {
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
+                aria-hidden="true"
               >
                 {item.icon}
               </div>

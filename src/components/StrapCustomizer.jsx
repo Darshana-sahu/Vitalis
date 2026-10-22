@@ -21,7 +21,7 @@ export default function StrapCustomizer() {
             <span className="text-gradient">Four elemental finishes.</span>
           </h2>
           <p className="section-subtitle">
-            Every finish is precision-machined in Grade-5 aerospace titanium and paired with specialized technical straps.
+            Every finish is conceptualized in Grade-5 aerospace titanium and paired with specialized technical straps.
           </p>
         </div>
 
@@ -30,12 +30,12 @@ export default function StrapCustomizer() {
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
-            gap: '60px',
+            gap: '48px',
             alignItems: 'center',
             background: 'rgba(17, 24, 39, 0.6)',
             borderRadius: '24px',
             border: '1px solid rgba(255, 255, 255, 0.08)',
-            padding: '48px',
+            padding: 'clamp(24px, 4vw, 48px)',
           }}
         >
           {/* LEFT: INTERACTIVE LIVE WATCH PREVIEW */}
@@ -46,25 +46,27 @@ export default function StrapCustomizer() {
               alignItems: 'center',
               justifyContent: 'center',
               position: 'relative',
-              minHeight: '440px',
+              minHeight: '400px',
+              width: '100%',
             }}
           >
-            {/* Ambient backlight matching active finish */}
             <div
               style={{
                 position: 'absolute',
-                width: '300px',
-                height: '300px',
+                width: '280px',
+                height: '280px',
+                maxWidth: '90%',
                 borderRadius: '50%',
                 background: current.accentGlow,
                 filter: 'blur(70px)',
                 pointerEvents: 'none',
                 transition: 'all 0.5s ease',
               }}
+              aria-hidden="true"
             />
 
-            <div style={{ position: 'relative', zIndex: 2 }}>
-              <WatchIllustration colorway={selectedColor} bpm={68} />
+            <div style={{ position: 'relative', zIndex: 2, maxWidth: '100%', display: 'flex', justifyContent: 'center' }}>
+              <WatchIllustration colorway={selectedColor} bpm={68} idPrefix={`customizer-${selectedColor}`} />
             </div>
 
             <div style={{ marginTop: '20px', textAlign: 'center' }}>
@@ -76,10 +78,10 @@ export default function StrapCustomizer() {
 
           {/* RIGHT: SELECTOR & FINISH SPECS */}
           <div>
-            <h3 style={{ fontSize: '26px', fontWeight: 700, marginBottom: '8px' }}>
+            <h3 style={{ fontSize: 'clamp(22px, 3vw, 28px)', fontWeight: 700, marginBottom: '8px' }}>
               {current.name}
             </h3>
-            <div style={{ fontSize: '13px', fontFamily: 'var(--font-mono)', color: '#3DD9B4', marginBottom: '20px' }}>
+            <div style={{ fontSize: '13px', fontFamily: 'var(--font-mono)', color: '#3DD9B4', marginBottom: '18px' }}>
               {current.material}
             </div>
 
@@ -93,7 +95,7 @@ export default function StrapCustomizer() {
                 Select Concept Finish:
               </label>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
+              <div className="colorway-buttons-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
                 {colorwayList.map((c) => {
                   const isActive = selectedColor === c.id;
                   return (
@@ -111,8 +113,11 @@ export default function StrapCustomizer() {
                         border: isActive ? `1.5px solid ${c.accentColor}` : '1px solid rgba(255, 255, 255, 0.08)',
                         textAlign: 'left',
                         transition: 'all 0.2s ease',
+                        cursor: 'pointer',
+                        minHeight: '48px',
                       }}
                       aria-pressed={isActive}
+                      aria-label={`Select ${c.name} finish`}
                     >
                       <span
                         style={{
@@ -122,6 +127,7 @@ export default function StrapCustomizer() {
                           background: c.bandColor,
                           border: `2px solid ${c.accentColor}`,
                           boxShadow: isActive ? `0 0 10px ${c.accentGlow}` : 'none',
+                          flexShrink: 0,
                         }}
                       />
                       <div>
@@ -140,35 +146,36 @@ export default function StrapCustomizer() {
 
             {/* TECHNICAL STRAP ATTRIBUTES */}
             <div
+              className="strap-specs-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(2, 1fr)',
                 gap: '16px',
                 borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-                paddingTop: '24px',
+                paddingTop: '20px',
               }}
             >
               <div>
                 <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#64748B', display: 'block' }}>
                   CHASSIS WEIGHT
                 </span>
-                <span style={{ fontSize: '16px', fontWeight: 700, color: '#F8FAFC' }}>
-                  28.4g (Excl. Strap)
+                <span style={{ fontSize: '15px', fontWeight: 700, color: '#F8FAFC' }}>
+                  28.4g (Concept Target)
                 </span>
               </div>
               <div>
                 <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#64748B', display: 'block' }}>
                   WATER IMMERSION
                 </span>
-                <span style={{ fontSize: '16px', fontWeight: 700, color: '#3DD9B4' }}>
-                  5 ATM / 50M
+                <span style={{ fontSize: '15px', fontWeight: 700, color: '#3DD9B4' }}>
+                  5 ATM / 50M Target
                 </span>
               </div>
               <div>
                 <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#64748B', display: 'block' }}>
                   CLASP MECHANISM
                 </span>
-                <span style={{ fontSize: '16px', fontWeight: 700, color: '#F8FAFC' }}>
+                <span style={{ fontSize: '15px', fontWeight: 700, color: '#F8FAFC' }}>
                   Micro-Adjust Pin & Loop
                 </span>
               </div>
@@ -176,14 +183,14 @@ export default function StrapCustomizer() {
                 <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#64748B', display: 'block' }}>
                   SKIN COMPATIBILITY
                 </span>
-                <span style={{ fontSize: '16px', fontWeight: 700, color: '#F8FAFC' }}>
+                <span style={{ fontSize: '15px', fontWeight: 700, color: '#F8FAFC' }}>
                   Hypoallergenic Grade-1
                 </span>
               </div>
             </div>
 
             <div style={{ marginTop: '28px' }}>
-              <a href="#waitlist" className="btn btn-teal" style={{ width: '100%', textAlign: 'center' }}>
+              <a href="#waitlist" className="btn btn-teal" style={{ width: '100%', textAlign: 'center', minHeight: '48px' }}>
                 Reserve in {current.name}
               </a>
             </div>
@@ -198,7 +205,16 @@ export default function StrapCustomizer() {
           .customizer-grid {
             grid-template-columns: 1fr !important;
             padding: 24px !important;
-            gap: 36px !important;
+            gap: 32px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .colorway-buttons-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .strap-specs-grid {
+            grid-template-columns: 1fr !important;
+            gap: 12px !important;
           }
         }
       `}</style>

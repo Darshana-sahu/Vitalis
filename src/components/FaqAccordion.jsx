@@ -19,11 +19,11 @@ const FAQS = [
   },
   {
     q: 'Can the watch be worn during swimming and water sports?',
-    a: 'The industrial architecture targets a hermetic 5 ATM (50-meter equivalent) immersion rating, making it suitable for surface lap swimming, showering, and rigorous sweaty workouts.',
+    a: 'The industrial architecture targets a hermetic 5 ATM (50-meter equivalent) immersion rating, making it suitable for surface lap swimming, showering, and rigorous workouts.',
   },
   {
     q: 'Are VITALIS metrics intended as medical diagnostic tools?',
-    a: 'No. As a fictional design project, all specifications and metrics are illustrative concepts. Any real-world health monitoring device requires formal regulatory clearance (such as FDA 510(k) or CE-MDR certification) before making diagnostic claims.',
+    a: 'No. VITALIS is a conceptual product demonstration. Specifications and biometric readings are illustrative and do not represent validated medical measurements. Any real-world diagnostic system requires formal regulatory clearance (such as FDA 510(k) or CE-MDR) before making medical claims.',
   },
 ];
 
@@ -55,6 +55,9 @@ export default function FaqAccordion() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           {FAQS.map((faq, idx) => {
             const isOpen = openIndex === idx;
+            const panelId = `faq-panel-${idx}`;
+            const buttonId = `faq-btn-${idx}`;
+
             return (
               <div
                 key={idx}
@@ -68,10 +71,11 @@ export default function FaqAccordion() {
               >
                 <button
                   type="button"
+                  id={buttonId}
                   onClick={() => toggleFaq(idx)}
                   style={{
                     width: '100%',
-                    padding: '22px 26px',
+                    padding: 'clamp(18px, 3vw, 22px) clamp(18px, 3vw, 26px)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
@@ -80,19 +84,24 @@ export default function FaqAccordion() {
                     color: '#F8FAFC',
                     fontSize: '16px',
                     fontWeight: 600,
+                    minHeight: '48px',
+                    cursor: 'pointer',
                   }}
                   aria-expanded={isOpen}
+                  aria-controls={panelId}
                 >
                   <span>{faq.q}</span>
                   <span
                     style={{
-                      fontSize: '20px',
+                      fontSize: '22px',
                       color: isOpen ? '#3DD9B4' : '#94A3B8',
                       transition: 'transform 0.25s ease',
                       transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
                       display: 'inline-block',
                       lineHeight: 1,
+                      flexShrink: 0,
                     }}
+                    aria-hidden="true"
                   >
                     +
                   </span>
@@ -100,8 +109,11 @@ export default function FaqAccordion() {
 
                 {isOpen && (
                   <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
                     style={{
-                      padding: '0 26px 24px',
+                      padding: '0 clamp(18px, 3vw, 26px) 20px',
                       fontSize: '14.5px',
                       color: '#94A3B8',
                       lineHeight: 1.6,

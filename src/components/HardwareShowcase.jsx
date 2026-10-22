@@ -4,28 +4,28 @@ const HARDWARE_PILLARS = [
   {
     tag: 'Chassis Metallurgy',
     title: 'Aerospace Grade-5 Titanium',
-    desc: 'Milled from a single solid billet of Ti-6Al-4V alloy. Delivers double the tensile strength of aluminum at half the mass of stainless steel.',
+    desc: 'Concept architecture milled from a single billet of Ti-6Al-4V alloy. Conceived to deliver double the tensile strength of aluminum at half the mass of steel.',
     specs: ['41mm Unibody Architecture', 'CNC Diamond Chamfering', 'PVD Ceramic DLC Coating'],
     accent: '#4F8CFF',
   },
   {
     tag: 'Optical Shielding',
     title: 'Micro-Curved Sapphire Crystal',
-    desc: 'Synthetic corundum with a Mohs rating of 9, second only to diamond. Multi-layer anti-reflective optical coatings maximize optical sensor transmission.',
+    desc: 'Envisioned synthetic corundum with a Mohs rating of 9. Anti-reflective optical coatings designed to maximize optical sensor transmission.',
     specs: ['Mohs Hardness 9 Resistance', 'Oleophobic Hydrophobic Seal', 'Dual-Bevel Ergonomic Edge'],
     accent: '#3DD9B4',
   },
   {
     tag: 'Sensor Architecture',
     title: 'Hexa-Wavelength Biosensor Cluster',
-    desc: 'Six distinct emitter wavelengths (green, amber, 660nm red, 940nm infrared) paired with ultra-sensitive photodiodes to penetrate varying subcutaneous tissue layers.',
+    desc: 'Six concept emitter wavelengths (green, amber, 660nm red, 940nm infrared) modeled with dual photodiodes for layered optical penetration.',
     specs: ['Dual Balanced Photodiodes', 'Sub-Micron LED Alignment', 'Stray Light Shielding Baffle'],
     accent: '#38BDF8',
   },
   {
     tag: 'Tactile Interface',
     title: 'Piezoelectric Solid-State Crown',
-    desc: 'A linear resonant actuator producing precision micro-vibrations for tactile detents without mechanical chassis penetrations, securing 5 ATM hermetic sealing.',
+    desc: 'A linear resonant actuator concept producing precision micro-vibrations for tactile clicks without mechanical chassis openings, preserving 5 ATM sealing.',
     specs: ['Zero Mechanical Ingress', 'Sub-Millisecond Haptic Pulse', 'Force-Sensitive Pressure Sensor'],
     accent: '#A78BFA',
   },
@@ -46,7 +46,7 @@ export default function HardwareShowcase() {
             <span className="text-gradient">Forged in Grade-5 Titanium.</span>
           </h2>
           <p className="section-subtitle">
-            A cohesive integration of aerospace metallurgy, hermetic acoustic isolation, and sub-surface optical biosensing.
+            A cohesive conceptual integration of envisioned aerospace metallurgy, hermetic acoustic isolation, and sub-surface optical biosensing.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export default function HardwareShowcase() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
             gap: '24px',
           }}
         >
@@ -63,7 +63,7 @@ export default function HardwareShowcase() {
               key={idx}
               className="glass-panel"
               style={{
-                padding: '32px',
+                padding: 'clamp(20px, 3vw, 32px)',
                 display: 'flex',
                 flexDirection: 'column',
                 position: 'relative',
@@ -100,7 +100,7 @@ export default function HardwareShowcase() {
 
         <div style={{ textAlign: 'center', marginTop: '36px' }}>
           <p style={{ fontSize: '12px', fontFamily: 'var(--font-mono)', color: '#64748B' }}>
-            * Technical hardware specifications represent fictional concept architecture for industrial design demonstration.
+            * VITALIS is a conceptual product demonstration. Specifications and biometric readings are illustrative and do not represent validated medical measurements.
           </p>
         </div>
 
